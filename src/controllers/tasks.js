@@ -1,65 +1,68 @@
-// controller for handling task-related requests
 const Task = require('../models/task');
+
+// Centralized error handler, we were getting too spread out
+const handleErrors = (res, error, defaultMessage = 'An error occurred') => {
+    console.error(error);
+    const message = error.message || defaultMessage;
+    const status = error.status || 500;
+    res.status(status).json({ error: message });
+};
+
+// Validate task input
+// TBD: implement Joi or express-validator, but simple validation is fine for now
+const validateTaskInput = ({ title }) => {
+    if (!title) throw { message: 'Title is required', status: 400 };
+};
 
 const getAllTasks = async (req, res) => {
     try {
         const tasks = await Task.findAll();
         res.json(tasks);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    } catch (error) {
+        handleErrors(res, error);
     }
 };
 
 const createTask = async (req, res) => {
     try {
-        const { title, description } = req.body;
-        if (!title) {
-            return res.status(400).json({ error: 'Title is required' });
-        }
-
-        const newTask = await Task.create({ title, description });
+        validateTaskInput(req.body);
+        const newTask = await Task.create(req.body);
         res.status(201).json(newTask);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    } catch (error) {
+        handleErrors(res, error);
     }
 };
 
 const getTask = async (req, res) => {
     try {
         const task = await Task.findById(req.params.id);
-        if (!task) {
-            return res.status(404).json({ error: 'Task not found' });
-        }
+        if (!task) throw { message: 'Task not found', status: 404 };
         res.json(task);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    } catch (error) {
+        handleErrors(res, error);
     }
 };
 
 const updateTask = async (req, res) => {
     try {
-        const { title, description } = req.body;
-        const updatedTask = await Task.update(req.params.id, { title, description });
-
-        if (!updatedTask) {
-            return res.status(404).json({ error: 'Task not found' });
-        }
-
+        const updatedTask = await Task.update(
+            req.params.id,
+            req.body
+        );
+        if (!updatedTask) throw { message: 'Task not found', status: 404 };
         res.json(updatedTask);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    } catch (error) {
+        handleErrors(res, error);
     }
 };
 
 const deleteTask = async (req, res) => {
     try {
         const deleted = await Task.delete(req.params.id);
-        if (!deleted) {
-            return res.status(404).json({ error: 'Task not found' });
-        }
+        if (!deleted) throw { message: 'Task not found', status: 404 };
         res.status(204).send();
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    } catch (error) {
+        handleErrors(res, error);
     }
 };
 

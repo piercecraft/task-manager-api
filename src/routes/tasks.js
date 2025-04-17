@@ -15,4 +15,14 @@ router.get('/:id', getTask);
 router.patch('/:id', updateTask);
 router.delete('/:id', deleteTask);
 
+// TBD:
+// '/?status=:status': return by status value
+// '/?priority=:priority': return by priority value
+// '/?search=:keyword': return keyword matches in title or description
+// '/?sortBy=dueDate&order=asc': sortability and order
+// and a mix of the above with & as seperator, e.g. /?status=completed&sortBy=dueDate&order=asc
+// '/?page=2&limit=10': basic pagination
+
+// future: task assignment, task completion, comments, audit
+
 module.exports = router;

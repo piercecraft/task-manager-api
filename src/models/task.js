@@ -1,4 +1,4 @@
-// Using in-memory data store for now, should be replaced with db in production
+// Using in-memory data store for now, should be replaced with db in prod
 let tasks = [];
 let currentId = 1;
 
@@ -11,6 +11,7 @@ class Task {
         return tasks.find(task => task.id === parseInt(id));
     }
 
+    // going to keep everything standardized on ISO going forward
     static async create({ title, description = '' }) {
         const newTask = {
             id: currentId++,
