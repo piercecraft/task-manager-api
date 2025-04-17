@@ -117,15 +117,15 @@ npm run coverage   # Generate report (saved to coverage/)
 | **Integration** | `src/__tests__/integration/` | `npx jest integration` |
 | **All**         | `src/__tests__/`             | `npx jest` (default)   |
 
-### CI/CD
+## CI/CD
 
 Automated testing via GitHub Actions:
 
-- Runs on push/PR to `main`
-- Tests Node.js 18.x and 20.x
-- Publishes coverage report as artifact
+- Runs on push & pull requests
+- Tests Node.js 20.x
+- Uploads coverage reports as artifacts
 
-[![Tests](https://github.com/piercecraft/task-manager-api/actions/workflows/tests.yml/badge.svg)](https://github.com/piercecraft/task-manager-api/actions)
+![Tests](https://github.com/piercecraft/task-manager-api/actions/workflows/tests.yml/badge.svg)
 
 ### Coverage Reports
 
