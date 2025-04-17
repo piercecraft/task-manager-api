@@ -106,39 +106,38 @@ src/
 ```powershell
 npm test           # Run all tests (unit + integration)
 npm run test:watch # Interactive watch mode
-npx jest --coverage # Generate coverage report
+npm run coverage   # Generate report (saved to coverage/)
 ```
 
 ### Test Structure
 
-| Type            | Location                     | Description                    |
-| --------------- | ---------------------------- | ------------------------------ |
-| **Unit**        | `src/__tests__/unit/`        | Model/business logic tests     |
-| **Integration** | `src/__tests__/integration/` | API endpoint tests (Supertest) |
+| Type            | Location                     | Test Command           |
+| --------------- | ---------------------------- | ---------------------- |
+| **Unit**        | `src/__tests__/unit/`        | `npx jest unit`        |
+| **Integration** | `src/__tests__/integration/` | `npx jest integration` |
+| **All**         | `src/__tests__/`             | `npx jest` (default)   |
 
-### Azure Pipelines
+### CI/CD
 
-The [`azure-pipelines.yml`](./azure-pipelines.yml) runs tests on push with:
+Automated testing via GitHub Actions:
 
-- Automatic test execution
-- JUnit test reporting
-- Fail-fast on critical errors
+- Runs on push/PR to `main`
+- Tests Node.js 18.x and 20.x
+- Publishes coverage report as artifact
 
-```yaml
-# Pipeline snippet (simplified)
-steps:
-  - script: npm ci
-  - script: npm test
-    displayName: "Run Jest Tests"
-  - task: PublishTestResults@2
-    inputs:
-      testResultsFiles: "test-results.xml"
-```
+[![Tests](https://github.com/piercecraft/task-manager-api/actions/workflows/tests.yml/badge.svg)](https://github.com/piercecraft/task-manager-api/actions)
 
 ### Coverage Reports
 
 Generated in `coverage/`:
 
-- Terminal summary during local runs
-- HTML details: `coverage/lcov-report/index.html`
-- CI publishes to Azure Test Results
+```powershell
+open coverage/lcov-report/index.html  # View detailed report
+```
+
+Key Metrics Tracked:
+
+- Statement coverage
+- Branch coverage
+- Function coverage
+- Line coverage
