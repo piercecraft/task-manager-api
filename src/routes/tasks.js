@@ -8,7 +8,7 @@ const {
     deleteTask
 } = require('../controllers/tasks');
 
-// CRUD routes
+// Basic CRUD routes
 router.get('/', getAllTasks);
 router.post('/', createTask);
 router.get('/:id', getTask);

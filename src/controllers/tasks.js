@@ -1,3 +1,4 @@
+// controller for handling task-related requests
 const Task = require('../models/task');
 
 const getAllTasks = async (req, res) => {

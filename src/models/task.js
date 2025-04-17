@@ -1,4 +1,4 @@
-// In-memory data store for simplicity (would be replaced with a database in production)
+// Using in-memory data store for now, should be replaced with db in production
 let tasks = [];
 let currentId = 1;
 
