@@ -1,9 +1,12 @@
 ## TASK MANAGER API
 
-DESCRIPTION:  
+# Task Manager API
+
+## Description
+
 A simple REST API for task management built with Node.js and Express that allows creating, reading, updating and deleting tasks.
 
-KEY FEATURES:
+## Key Features
 
 - Create tasks with title and description
 - Retrieve all tasks or individual tasks by ID
@@ -11,68 +14,131 @@ KEY FEATURES:
 - Remove tasks
 - Uses in-memory storage (can be upgraded to database)
 
-TECHNOLOGY STACK:
+## Technology Stack
 
-- Node.js (runtime)
-- Express (web framework)
+- **Node.js** (runtime)
+- **Express** (web framework)
 
-INSTALLATION INSTRUCTIONS:
+## Installation Instructions
 
-1. Clone the repository:  
-   git clone <https://github.com/piercecraft/task-manager-api.git>
-2. Navigate to project directory:  
+1. Clone the repository:
+   ```powershell
+   git clone https://github.com/piercecraft/task-manager-api.git
+   ```
+2. Navigate to project directory:
+   ```powershell
    cd task-manager-api
-3. Install dependencies:  
+   ```
+3. Install dependencies:
+   ```powershell
    npm install
-4. Start the server:  
+   ```
+4. Start the server:
+   ```powershell
    npm run dev
+   ```
 
-API ENDPOINTS:
+## API Endpoints
 
-Base URL: <http://localhost:3000/api/tasks>
+**Base URL**: `http://localhost:3000/api/tasks`
 
-CREATE TASK:
+### Create Task
 
-- Method: POST
-- Request Body Format:  
-   {  
-   "title": "Your task title",  
-   "description": "Your task description"  
-   }
+- **Method**: POST
+- **Request Body**:
+  ```json
+  {
+    "title": "Your task title",
+    "description": "Your task description"
+  }
+  ```
 
-GET ALL TASKS:
+### Get All Tasks
 
-- Method: GET
-- No body required
+- **Method**: GET
+- **No body required**
 
-GET SINGLE TASK:
+### Get Single Task
 
-- Method: GET
-- URL Format: /api/tasks/{id}
+- **Method**: GET
+- **URL Format**: `/api/tasks/{id}`
 
-UPDATE TASK:
+### Update Task
 
-- Method: PATCH
-- URL Format: /api/tasks/{id}
-- Uses same body format as Create
+- **Method**: PATCH
+- **URL Format**: `/api/tasks/{id}`
+- **Body**: Same format as Create
 
-DELETE TASK:
+### Delete Task
 
-- Method: DELETE
-- URL Format: /api/tasks/{id}
+- **Method**: DELETE
+- **URL Format**: `/api/tasks/{id}`
 
-EXAMPLE USAGE:
+## Example Usage
 
-To create a task:  
-curl -X POST -H "Content-Type: application/json" -d '{"title":"My task"}' <http://localhost:3000/api/tasks>
+Create a task:
 
-To get all tasks:  
-curl <http://localhost:3000/api/tasks>
+```powershell
+curl -X POST -H "Content-Type: application/json" -d '{"title":"My task"}' http://localhost:3000/api/tasks
+```
 
-PROJECT STRUCTURE:  
-src/  
-app.js - Main application setup  
-routes/ - API endpoint definitions  
-controllers/ - Business logic  
-models/ - Data handling  
-utils/ - Helper functions
+Get all tasks:
+
+```powershell
+curl http://localhost:3000/api/tasks
+```
+
+## Project Structure
+
+```
+src/
+├── app.js          # Main application setup
+├── routes/         # API endpoint definitions
+├── controllers/    # Business logic
+├── models/         # Data handling
+└── utils/          # Helper functions
+```
+
+## Testing
+
+### Local Testing
+
+```powershell
+npm test           # Run all tests (unit + integration)
+npm run test:watch # Interactive watch mode
+npx jest --coverage # Generate coverage report
+```
+
+### Test Structure
+
+| Type            | Location                     | Description                    |
+| --------------- | ---------------------------- | ------------------------------ |
+| **Unit**        | `src/__tests__/unit/`        | Model/business logic tests     |
+| **Integration** | `src/__tests__/integration/` | API endpoint tests (Supertest) |
+
+### Azure Pipelines
+
+The [`azure-pipelines.yml`](./azure-pipelines.yml) runs tests on push with:
+
+- Automatic test execution
+- JUnit test reporting
+- Fail-fast on critical errors
+
+```yaml
+# Pipeline snippet (simplified)
+steps:
+  - script: npm ci
+  - script: npm test
+    displayName: "Run Jest Tests"
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: "test-results.xml"
+```
+
+### Coverage Reports
+
+Generated in `coverage/`:
+
+- Terminal summary during local runs
+- HTML details: `coverage/lcov-report/index.html`
+- CI publishes to Azure Test Results
