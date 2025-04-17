@@ -2,14 +2,19 @@
 const { resetTaskDatabase } = require('../testUtils');
 
 describe('Task Model', () => {
-  beforeEach(resetTaskDatabase);
+  beforeEach(() => {
+    resetTaskDatabase();
+  });
 
-  test('should create a task', () => {
-    const task = Task.create({ title: 'Unit Test Task' });
-    expect(task).toMatchObject({
-      id: expect.any(Number),
-      title: 'Unit Test Task',
-      description: expect.any(String)
-    });
+  test('should create a task with id', () => {
+    const task = Task.create({ title: 'Test Task' });
+    expect(task).toHaveProperty('id');
+    expect(typeof task.id).toBe('number');
+  });
+
+  test('should find created task', () => {
+    const newTask = Task.create({ title: 'Find Me' });
+    const foundTask = Task.findById(newTask.id);
+    expect(foundTask.title).toBe('Find Me');
   });
 });

@@ -1,18 +1,8 @@
-// Using in-memory data store for now, should be replaced with db in prod
 let tasks = [];
 let currentId = 1;
 
 class Task {
-    static async findAll() {
-        return tasks;
-    }
-
-    static async findById(id) {
-        return tasks.find(task => task.id === parseInt(id));
-    }
-
-    // going to keep everything standardized on ISO going forward
-    static async create({ title, description = '' }) {
+    static create({ title, description = '' }) {
         const newTask = {
             id: currentId++,
             title,
@@ -24,29 +14,21 @@ class Task {
         return newTask;
     }
 
-    static async update(id, { title, description }) {
-        const taskIndex = tasks.findIndex(task => task.id === parseInt(id));
-
-        if (taskIndex === -1) return null;
-
-        const updatedTask = {
-            ...tasks[taskIndex],
-            title: title || tasks[taskIndex].title,
-            description: description || tasks[taskIndex].description,
-            updatedAt: new Date().toISOString()
-        };
-
-        tasks[taskIndex] = updatedTask;
-        return updatedTask;
+    static findAll() {
+        return [...tasks];  // copy of the array
     }
 
-    static async delete(id) {
-        const taskIndex = tasks.findIndex(task => task.id === parseInt(id));
+    static findById(id) {
+        return tasks.find(task => task.id === id);
+    }
 
-        if (taskIndex === -1) return false;
-
-        tasks = tasks.filter(task => task.id !== parseInt(id));
-        return true;
+    static delete(id) {
+        const taskIndex = tasks.findIndex(task => task.id === id);
+        if (taskIndex !== -1) {
+            tasks.splice(taskIndex, 1);
+            return true;
+        }
+        return false;
     }
 }
 

@@ -7,7 +7,7 @@
     "dev": "nodemon src/app.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:ci": "jest --ci --runInBand",
+    "test:ci": "jest --ci --runInBand --coverage --reporters=default --reporters=jest-junit",
     "coverage": "jest --coverage"
   },
   "keywords": [],
