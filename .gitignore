@@ -1,5 +1,3 @@
-You got it! Here's a well-structured .gitignore file tailored for a Node.js/Express project to prevent unnecessary files like node_modules from being pushed to GitHub:
-
 # Logs
 logs
 *.log
