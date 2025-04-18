@@ -8,6 +8,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+      - run: mkdir -p test-results coverage
       - run: npm ci
       - run: npm run test:ci
       - uses: actions/upload-artifact@v4
