@@ -16,6 +16,8 @@ router.patch('/:id', updateTask);
 router.delete('/:id', deleteTask);
 
 // TBD:
+// auth/users/jwt
+// API subs:
 // '/?status=:status': return by status value
 // '/?priority=:priority': return by priority value
 // '/?search=:keyword': return keyword matches in title or description

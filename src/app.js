@@ -4,13 +4,11 @@ const taskRoutes = require('./routes/tasks');
 const app = require('express')();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(bodyParser.json());
 
-// Add this before your API routes
 app.get('/', (req, res) => {
-    res.set('Content-Type', 'text/html');
-    res.send(`
+  res.set('Content-Type', 'text/html');
+  res.send(`
       <!DOCTYPE html>
       <html>
       <head>
@@ -38,15 +36,14 @@ app.get('/', (req, res) => {
 // API routes
 app.use('/api/tasks', taskRoutes);
 
-// Error handling (middleware)
+// error handling (middleware)
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Something went wrong!' });
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong' });
 });
 
-// Start server
 if (process.env.NODE_ENV !== 'test') {
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 };
 
 module.exports = app;
