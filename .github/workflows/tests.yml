@@ -10,7 +10,6 @@ jobs:
           node-version: 18
       - run: npm ci
       - run: npm run test:ci
-      - run: dir /s # Debugging step to check for generated files
       - uses: actions/upload-artifact@v4
         if: always()
         with:
