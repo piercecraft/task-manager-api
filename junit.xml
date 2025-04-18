@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="0" errors="0" time="0.931">
-  <testsuite name="Tasks API" errors="0" failures="0" skipped="0" timestamp="2025-04-17T23:54:36" time="0.736" tests="1">
-    <testcase classname="Tasks API GET /api/tasks - should return all tasks" name="Tasks API GET /api/tasks - should return all tasks" time="0.029">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="1.135">
+  <testsuite name="Tasks API" errors="0" failures="0" skipped="0" timestamp="2025-04-17T23:59:44" time="0.927" tests="1">
+    <testcase classname="Tasks API GET /api/tasks - should return all tasks" name="Tasks API GET /api/tasks - should return all tasks" time="0.078">
     </testcase>
   </testsuite>
-  <testsuite name="Task Model" errors="0" failures="0" skipped="0" timestamp="2025-04-17T23:54:37" time="0.081" tests="2">
-    <testcase classname="Task Model should create a task with id" name="Task Model should create a task with id" time="0.001">
+  <testsuite name="Task Model" errors="0" failures="0" skipped="0" timestamp="2025-04-17T23:59:45" time="0.082" tests="2">
+    <testcase classname="Task Model should create a task with id" name="Task Model should create a task with id" time="0.002">
     </testcase>
     <testcase classname="Task Model should find created task" name="Task Model should find created task" time="0">
     </testcase>

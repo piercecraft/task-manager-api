@@ -11,7 +11,7 @@ jobs:
       - run: npm ci
       - run: npm run test:ci
       - run: dir /s # Debugging step to check for generated files
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@d8c8dbd6e63927801f9de42620f961a361b03be6034dcc11e83ca01f50cb9f40
         if: always()
         with:
           name: test-results
